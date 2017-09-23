@@ -124,7 +124,7 @@ module.exports = function (context) {
 
   var setup = context.setup
 
-  watchKnobs(midiPort.stream, mappings.row1.concat(mappings.row2, mappings.row3), function (id, data) {
+  watchKnobs(midiPort.stream, mappings.row1.concat(mappings.row2, mappings.row3, mappings.row4, mappings.row5, mappings.row6, mappings.row7, mappings.row8), function (id, data) {
     var param = params[id % 8][Math.floor(id / 8)]
     var chunk = setup.context.chunkLookup.get(obs.chunkIds()[id % 8])
     if (chunk && chunk.overrideParams && chunk.params) {
