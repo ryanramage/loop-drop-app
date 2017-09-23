@@ -19,15 +19,31 @@ var watchKnobs = require('lib/watch-knobs')
 var scaleInterpolate = require('lib/scale-interpolate')
 
 var turnOffAll = [176 + 8, 0, 0]
+// var mappings = {
+//   row1: ['176/74', '176/71', '176/76', '176/77', '176/78', '176/6', '176/38', '176/10'],
+//   row2: ['177/74', '177/71', '177/76', '177/77', '177/78', '177/6', '177/38', '177/10'],
+//   row3: ['178/74', '178/71', '178/76', '178/77', '178/78', '178/6', '178/38', '178/10'],
+//   sliders: ['176/5', '208', '176/73', '176/75', '176/72', '176/93', '176/91', '176/7'],
+//   trackControl: ['192/0', '192/1', '176/65', '176/127', '176/126'],
+//   mute: '152/106',
+//   solo: '152/107'
+// }
+
 var mappings = {
-  row1: ['176/74', '176/71', '176/76', '176/77', '176/78', '176/6', '176/38', '176/10'],
-  row2: ['177/74', '177/71', '177/76', '177/77', '177/78', '177/6', '177/38', '177/10'],
-  row3: ['178/74', '178/71', '178/76', '178/77', '178/78', '178/6', '178/38', '178/10'],
-  sliders: ['176/5', '208', '176/73', '176/75', '176/72', '176/93', '176/91', '176/7'],
-  trackControl: ['192/0', '192/1', '176/65', '176/127', '176/126'],
+  row1: ['176/72', '177/72', '178/72', '179/72', '180/72', '181/72', '182/72', '183/72'],
+  row2: ['176/73', '177/73', '178/73', '179/73', '180/73', '181/73', '182/73', '183/73'],
+  row3: ['176/74', '177/74', '178/74', '179/74', '180/74', '181/74', '182/74', '183/74'],
+  row4: ['176/75', '177/75', '178/75', '179/75', '180/75', '181/75', '182/75', '183/75'],
+  row5: ['176/76', '177/76', '178/76', '179/76', '180/76', '181/76', '182/76', '183/76'],
+  row6: ['176/77', '177/77', '178/77', '179/77', '180/77', '181/77', '182/77', '183/77'],
+  row7: ['176/78', '177/78', '178/78', '179/78', '180/78', '181/78', '182/78', '183/78'],
+  row8: ['176/79', '177/79', '178/79', '179/79', '180/79', '181/79', '182/79', '183/79'],
+  sliders: ['176/64', '176/65', '176/66', '176/67', '176/68', '176/69', '176/70', '176/71'],
+  trackControl: ['176/22', '177/22','178/22','179/22','180/22','181/22','182/22','183/22'],
   mute: '152/106',
   solo: '152/107'
 }
+
 
 module.exports = function (context) {
   var midiPort = MidiPort(context, function (port, lastPort) {
@@ -53,13 +69,23 @@ module.exports = function (context) {
     params[i] = [
       Value(0),
       Value(0),
+      Value(0),
+      Value(0),
+      Value(0),
+      Value(0),
+      Value(0),
       Value(0)
     ]
 
     paramLoopers[i] = [
       ParamLooper(context, params[i][0]),
       ParamLooper(context, params[i][1]),
-      ParamLooper(context, params[i][2])
+      ParamLooper(context, params[i][2]),
+      ParamLooper(context, params[i][3]),
+      ParamLooper(context, params[i][4]),
+      ParamLooper(context, params[i][5]),
+      ParamLooper(context, params[i][6]),
+      ParamLooper(context, params[i][7]),
     ]
 
     recordingIndexes.put(i, computed(paramLoopers[i].map(x => x.recording), (...args) => args.some(Boolean)))
@@ -102,7 +128,7 @@ module.exports = function (context) {
     var param = params[id % 8][Math.floor(id / 8)]
     var chunk = setup.context.chunkLookup.get(obs.chunkIds()[id % 8])
     if (chunk && chunk.overrideParams && chunk.params) {
-      param.set(data / 128)
+      param.set(data / 127)
     }
   })
 
