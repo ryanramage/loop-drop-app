@@ -123,7 +123,6 @@ module.exports = function (context) {
   obs.context = context
 
   var setup = context.setup
-
   watchKnobs(midiPort.stream, mappings.row1.concat(mappings.row2, mappings.row3, mappings.row4, mappings.row5, mappings.row6, mappings.row7, mappings.row8), function (id, data) {
     var param = params[id % 8][Math.floor(id / 8)]
     var chunk = setup.context.chunkLookup.get(obs.chunkIds()[id % 8])
@@ -131,7 +130,6 @@ module.exports = function (context) {
       param.set(data / 127)
     }
   })
-
   var sliderState = []
   watchKnobs(midiPort.stream, mappings.sliders, function (id, data) {
     var chunk = setup.context.chunkLookup.get(obs.chunkIds()[id])
@@ -141,7 +139,6 @@ module.exports = function (context) {
       chunk.overrideVolume.set(Math.pow(newPosition / 108, Math.E))
     }
   }, 108)
-
   var pressed = computed(MutantMap(setup.controllers, function (controller) {
     return controller && controller.currentlyPressed
   }), function (items) {
@@ -152,8 +149,6 @@ module.exports = function (context) {
       return result
     }, [])
   })
-
-
   var recordButtonBase = computed([recordingIndexes, playingIndexes], function (recordingIndexes, playingIndexes) {
     var result = []
     for (var i = 0; i < 8; i++) {
