@@ -56,6 +56,7 @@
     "pull-stream": "^3.4.5",
     "pull-stream-to-stream": "github:mmckegg/pull-stream-to-stream#e436acee18b71af8e71d1b5d32eee642351517c7",
     "random-access-memory": "^2.4.0",
+    "rc": "^1.2.1",
     "readable-blob-stream": "^1.1.0",
     "scroll-into-view": "~1.3.1",
     "smalltalk": "^2.4.1",
