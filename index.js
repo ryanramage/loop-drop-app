@@ -9,6 +9,7 @@ var Observ = require('mutant/value')
 var Property = require('lib/property')
 var watch = require('mutant/watch')
 var FileObject = require('lib/file-object')
+var loadKeyboards = require('lib/load-keyboards')
 
 var noDrop = require('lib/no-drop')
 var applyKeyboardTempo = require('lib/keyboard-tempo')
@@ -47,6 +48,8 @@ electron.ipcRenderer.on('close', function () {
 // create root context
 var audioContext = new global.AudioContext()
 var nodes = require('./nodes')
+loadKeyboards(nodes)
+
 var rootContext = window.rootContext = {
   fs: fs,
   audio: audioContext,
