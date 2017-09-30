@@ -39,6 +39,7 @@
     "geval": "^2.1.1",
     "insert-css": "^0.2.0",
     "json-query": "^1.4.0",
+    "lodash.get": "^4.4.2",
     "make-distortion-curve": "^1.0.0",
     "micro-css": "~2.0.0",
     "mirror-folder": "^2.1.1",
